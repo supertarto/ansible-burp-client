@@ -21,13 +21,14 @@
     dest: "{{ burpcli_download_dir }}/{{ burpcli_src }}.{{ burpcli_srcext }}"
     timeout: 30
     validate_certs: false
+  register: burpcli_dl
 
 - name: "Unarchive Burp"
   unarchive:
     src: "{{ burpcli_download_dir }}/{{ burpcli_src }}.{{ burpcli_srcext }}"
     dest: "{{ burpcli_download_dir }}/"
     remote_src: true
-  register: burpcli_unarchive
+  when: burpcli_dl
 
 - name: "Autoreconf source files"
   shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && autoreconf -vif creates={{ burpcli_download_dir }}/{{ burpcli_src }}/configure

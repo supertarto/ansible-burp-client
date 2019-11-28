@@ -20,13 +20,13 @@
     url: "{{ burpcli_url }}"
     dest: "{{ burpcli_download_dir }}/{{ burpcli_src }}.{{ burpcli_srcext }}"
     timeout: 30
-    validate_certs: no
+    validate_certs: false
 
 - name: "Unarchive Burp"
   unarchive:
     src: "{{ burpcli_download_dir }}/{{ burpcli_src }}.{{ burpcli_srcext }}"
     dest: "{{ burpcli_download_dir }}/"
-    remote_src: yes
+    remote_src: true
   register: burpcli_unarchive
 
 - name: "Autoreconf source files"
@@ -57,7 +57,7 @@
 - name: "Create configurations folders"
   file:
     path: "{{ item }}"
-    recurse: yes
+    recurse: true
     state: directory
   with_items:
     - '{{ burpcli_ca_csr_dir }}'

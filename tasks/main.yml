@@ -1,2 +1,29 @@
 ---
+- name: "Include OS specific variables"
+  include_vars: "{{ ansible_os_family }}.yml"
 
+- include_tasks: build-burp.yml
+
+- name: "Install client configuration file"
+  template:
+    src: burp.conf.j2
+    dest: "{{ burpcli_etc_path }}/burp/burp.conf"
+
+- name: "Create log directory"
+  file:
+    path: "{{ burpcli_logs }}"
+    state: directory
+
+- name: "Create a cron tasks"
+  cron:
+    name: burp client schedule
+    job: "[ -x {{ burpcli_usr_path }}/sbin/burp ] && {{ burpcli_usr_path }}/sbin/burp -a t >> {{ burpcli_logs }}/burp_client.log 2>&1"
+    user: root
+    cron_file: burp_client
+    minute: "7,27,47"
+
+- name: "Active cron"
+  service:
+    name: "{{ burpcli_cron_service }}"
+    state: started
+    enabled: true

@@ -1,0 +1,33 @@
+mode = client
+server = {{ burpcli_client_server }}
+
+port = {{ burpcli_client_port }}
+status_port = {{ burpcli_client_status_port }}
+pidfile = {{ burpcli_client_pidfile }}
+progress_counter = {{ burpcli_client_progress_counter }}
+cname = {{ burpcli_client_cname }}
+password = {{ burpcli_client_password }}
+protocol = {{ burpcli_client_protocol }}
+syslog = {{ burpcli_client_syslog }}
+stdout = 1
+ca_burp_ca = {{ burpcli_client_ca_burp_ca }}
+ca_csr_dir = {{ burpcli_client_ca_csr_dir }}
+ssl_cert_ca = {{ burpcli_client_ssl_cert_ca }}
+ssl_cert = {{ burpcli_client_ssl_cert }}
+ssl_key = {{ burpcli_client_ssl_key }}
+ssl_key_password = {{ burpcli_client_ssl_key_password }}
+ssl_peer_cn = {{ burpcli_client_ssl_peer_cn }}
+encryption_password = {{ burpcli_client_encryption_password }}
+
+server_can_override_includes = {{ burpcli_client_server_can_override_includes }}
+{% if burpcli_client_includes is defined %}
+{% for include in burpcli_client_includes %}
+include = {{ include }}
+{% endfor %}
+{% endif %}
+{% if burpcli_client_excludes is defined %}
+
+{% for exclude in burpcli_client_excludes %}
+exclude = {{ exclude }}
+{% endfor %}
+{% endif %}

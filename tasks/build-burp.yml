@@ -28,7 +28,7 @@
     src: "{{ burpcli_download_dir }}/{{ burpcli_src }}.{{ burpcli_srcext }}"
     dest: "{{ burpcli_download_dir }}/"
     remote_src: true
-  register: burpcli_unarchive 
+  register: burpcli_unarchive
   when: burpcli_dl | bool
 
 - name: "Autoreconf source files"

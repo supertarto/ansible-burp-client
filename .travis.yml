@@ -6,16 +6,16 @@ env:
   global:
     - ROLE_NAME: burp-client
   matrix:
-    - MOLECULE_DISTRIB: debian10
-    - MOLECULE_DISTRIB: debian9
+    - MOLECULE_DISTRIB: debian10:latest
+    - MOLECULE_DISTRIB: debian9:latest
 
 install:
   - pip install molecule docker
 
 before_script:
   - cd ../
-  - mv ansible-$ROLE_NAME geerlingguy.$ROLE_NAME
-  - cd geerlingguy.$ROLE_NAME
+  - mv ansible-$ROLE_NAME supertarto.$ROLE_NAME
+  - cd supertarto.$ROLE_NAME
 
 script:
   - molecule test

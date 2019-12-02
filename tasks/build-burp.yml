@@ -1,6 +1,6 @@
 ---
 - name: "Install requirements"
-  package:
+  apt:
     name: "{{ burpcli_build_dependencies | join(',') }}"
     state: present
 

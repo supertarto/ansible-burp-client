@@ -66,7 +66,7 @@ burpcli_client_excludes: []
 
 ## Installation
 ```
-ansible-galaxy install supertarto.burp-client
+ansible-galaxy install supertarto.burp_client
 ```
 ## License
 GPL V3.0

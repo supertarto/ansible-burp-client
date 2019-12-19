@@ -1,5 +1,6 @@
 # ansible-role-template
 [![Build Status](https://travis-ci.org/supertarto/ansible-burp-client.svg?branch=master)](https://travis-ci.org/supertarto/ansible-burp-client)
+
 Install and configure a burp client with ansible. This role is meant to suits my need and is inspired by https://github.com/CoffeeITWorks/ansible_burp2_client
 If you want a more complete role, go check it!
 

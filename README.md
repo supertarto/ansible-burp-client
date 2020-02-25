@@ -5,7 +5,6 @@ Install and configure a burp client with ansible. This role is meant to suits my
 If you want a more complete role, go check it!
 
 ## Tested plateform
-* Debian 9 (Stretch)
 * Debian 10 (Buster)
 
 ## Role variables

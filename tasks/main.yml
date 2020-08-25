@@ -19,6 +19,5 @@
     name: "burp client schedule"
     job: "[ -x {{ burpcli_usr_path }}/sbin/burp ] && {{ burpcli_usr_path }}/sbin/burp -a t >> {{ burpcli_logs }}/burp_client.log 2>&1"
     user: root
-    cron_file: burp_client
     minute: "7,27,47"
   notify: "Active cron"

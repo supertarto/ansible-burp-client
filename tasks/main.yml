@@ -21,9 +21,4 @@
     user: root
     cron_file: burp_client
     minute: "7,27,47"
-
-- name: "Active cron"
-  service:
-    name: "{{ burpcli_cron_service }}"
-    state: started
-    enabled: true
+  notify: "Active cron"

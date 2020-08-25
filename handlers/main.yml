@@ -1,0 +1,6 @@
+---
+- name: "Active cron"
+  service:
+    name: "{{ burpcli_cron_service }}"
+    state: started
+    enabled: true

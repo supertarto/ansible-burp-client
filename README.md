@@ -1,5 +1,7 @@
 # Ansible Burp-Client
-[![Build Status](https://travis-ci.com/supertarto/ansible-burp-client.svg?branch=master)](https://travis-ci.com/supertarto/ansible-burp-client)
+
+
+[![CI](https://github.com/supertarto/ansible-burp-client/workflows/CI/badge.svg?event=push)](https://github.com/supertarto/ansible-burp-client/actions?query=workflow%3ACI)
 
 Install and configure a burp client with ansible. This role is meant to suits my need and is inspired by https://github.com/CoffeeITWorks/ansible_burp2_client
 If you want a more complete role, go check it!

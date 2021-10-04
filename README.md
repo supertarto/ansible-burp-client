@@ -8,6 +8,7 @@ If you want a more complete role, go check it!
 
 ## Tested plateform
 * Debian 10 (Buster)
+* Debian 11 (Bulleyes)
 
 ## Role variables
 

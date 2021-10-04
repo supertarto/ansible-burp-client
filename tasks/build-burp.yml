@@ -1,22 +1,22 @@
 ---
 - name: "Install requirements"
-  apt:
+  ansible.builtin.apt:
     name: "{{ burpcli_build_dependencies | join(',') }}"
     state: present
 
 - name: "Force Burp reinstall"
-  file:
+  ansible.builtin.file:
     path: "{{ burpcli_download_dir }}"
     state: absent
   when: burpcli_force_reinstall
 
 - name: "Does burp download file exist?"
-  file:
+  ansible.builtin.file:
     path: "{{ burpcli_download_dir }}"
     state: directory
 
 - name: "Download Burp"
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ burpcli_url }}"
     dest: "{{ burpcli_download_dir }}/{{ burpcli_src }}.{{ burpcli_srcext }}"
     timeout: 30
@@ -24,7 +24,7 @@
   register: burpcli_dl
 
 - name: "Unarchive Burp"
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ burpcli_download_dir }}/{{ burpcli_src }}.{{ burpcli_srcext }}"
     dest: "{{ burpcli_download_dir }}/"
     remote_src: true
@@ -34,23 +34,23 @@
     - skip_ansible_lint
 
 - name: "Autoreconf source files"
-  shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && autoreconf -vif creates={{ burpcli_download_dir }}/{{ burpcli_src }}/configure
+  ansible.builtin.shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && autoreconf -vif creates={{ burpcli_download_dir }}/{{ burpcli_src }}/configure
 
 - name: "./configure"
-  shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && {{ burpcli_configure_line }}
+  ansible.builtin.shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && {{ burpcli_configure_line }}
   args:
     creates: "{{ burpcli_download_dir }}/{{ burpcli_src }}/Makefile"
 
 - name: "Make"
-  shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && make creates={{ burpcli_download_dir }}/{{ burpcli_src }}/burp
+  ansible.builtin.shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && make creates={{ burpcli_download_dir }}/{{ burpcli_src }}/burp
 
 - name: "Does Burp already exists ?"
-  stat:
+  ansible.builtin.stat:
     path: "{{ burpcli_bin_path }}"
   register: burpcli_is_installed
 
 - name: "Uninstall Burp binary, before reinstall"
-  shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && make uninstall removes={{ burpcli_bin_path }}
+  ansible.builtin.shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && make uninstall removes={{ burpcli_bin_path }}
   when: burpcli_is_installed.stat.exists and burpcli_unarchive.changed
   tags:
     - skip_ansible_lint
@@ -59,7 +59,7 @@
   shell: cd {{ burpcli_download_dir }}/{{ burpcli_src }} && make install creates={{ burpcli_bin_path }}
 
 - name: "Create configurations folders"
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     recurse: true
     state: directory

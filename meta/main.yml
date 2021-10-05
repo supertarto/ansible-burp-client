@@ -2,7 +2,7 @@
 galaxy_info:
   author: "Xavier Binois"
   description: "Install and configure a Burp backup client with Ansible"
-  role_name: burp_client
+  role_name: "burp-client"
   namespace: "supertarto"  
   license: "GNU General Public License v3.0"
   min_ansible_version: 2.8
